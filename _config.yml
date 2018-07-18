@@ -29,10 +29,6 @@ exclude:
 keep_files:
   - CNAME
   - assets
-collections:
-  relatos:
-    output: true
-# paging
 pagination:
   enabled: true
   per_page: 10
