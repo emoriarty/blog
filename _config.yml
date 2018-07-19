@@ -1,11 +1,7 @@
-title: Nocturnidades
+title: Afilando piedras
 email: emoriarty81@gmail.com
 description: > 
-  La intención inicial de este blog es publicar y compartir relatos, ideas y 
-  tribulaciones varias. También tienen cabida documentos técnicos relacionados 
-  con la programación.
-  El título del blog hace referencia al único momento del día (de la noche) 
-  en que los artículos son perpetrados.
+  En este blog está dedicado a conceptos, ideas y soluciones a cuestiones relacionados con la programación, orientado principalmente a Front-end.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: emoriarty81

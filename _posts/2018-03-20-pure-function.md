@@ -2,8 +2,7 @@
 title: "Pure Function"
 date: 2018-03-20 01:00:00 +0100
 excerpt: Las funciones puras permiten construir aplicaciones más robustas gracias a su carácter inmutable. También ofrecen una gran reusabiliad.
-permalink: /articulos/pure-function
-category: it
+permalink: /pure-function
 tags: [programacion-funcional, diseño, patrones, terminos-informaticos]
 ---
 La programación funcional es un término que en los últimos años ha tomado cierta relevancia en el mundo de la programación. También otros paradigmas como concurrencia fiable o componentización están en boga. Todos estos conceptos tienen su base en una serie de patrones y cualidades del lenguaje que los hacen posibles. Entre estos pautas se encuentran las funciones puras.
@@ -73,9 +72,7 @@ Aunque en raras ocasiones generamos este tipo de gráficos, la capacidad de inte
 
 Que el origen de las funciones esté en las matemáticas, no significa que uno deba haber obtenido un doctorado para entenderlas. Si es cierto que es recomendable tener un conocimiento mínimo en la materia. En ciertas ocasiones podrías encontrarte con algún problema de solución matemática y no saber resolverlo por no tener el bagaje necesario.
 
-La gran diferencia entre ambas disciplinas estriba en que las funciones en matemáticas sirven exclusivamente a un solo propósito. En programación pueden tener diferentes usos. En la mayoría de las ocasiones se utilizan para realizar procesos completos, que por su naturaleza arbitraria permite la ausencia o presencia múltiple de parámetros. También puede devolver diferentes resultados en base a un mismo argumento. Esta cualidad procedimental de las funciones es la que se pretende evitar mediante programación funcional.
-
-Para ello se acuñó el término función pura, que no es más que el uso específico de la funciones sea el mismo que en matemáticas.
+La gran diferencia entre ambas disciplinas estriba en que las funciones en matemáticas sirven exclusivamente a un solo propósito. En programación pueden tener diferentes usos. En la mayoría de las ocasiones se utilizan para realizar procesos completos, que por su naturaleza arbitraria permite la ausencia o presencia múltiple de parámetros. También puede devolver diferentes resultados en base a un mismo argumento. Esta cualidad procedimental de las funciones es la que se pretende evitar mediante programación funcional. Para ello se acuñó el término función pura, que no es más que el uso específico de la funciones sea el mismo que en matemáticas.
 
 ¿Y qué beneficio aporta una función pura ante una convencional? Podrías estar preguntándote. Para responder a esta pregunta, se expone más abajo una serie de características que muestran porqué favorecer el uso este tipo de funciones.
 
@@ -249,7 +246,7 @@ Y así podríamos seguir hasta haber sustituido todas las funciones.
 
 Obviamente esta no es una práctica que vayamos a utilizar para comprobar todo el fuente en cualquier proyecto medianamente grande. El resultado final podría ser un galimatías muy serio. Por tanto, la transparencia referencial, no tiene mayor utilidad que durante el proceso de desarrollo. Nos permite poder comprobar el comportamiento, fiabilidad y pureza de una función en base al intercambio de su cuerpo por la llamada.
 
-Si quieres, no sería un mal ejercicio terminar por tu cuenta de completar el intercambio de llamadas a función por su contenido. Cuando lo tengas hecho comprueba que el resultado sea el mismo que cuando ejecutaste el fuente original.
+No sería un mal ejercicio completar  por tu cuenta el intercambio de llamadas a función por su contenido. Cuando lo tengas hecho comprueba que el resultado sea el mismo que cuando se ejecutó el fuente original.
 
 {% highlight javascript %}
 [{

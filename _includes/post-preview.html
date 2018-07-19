@@ -2,11 +2,6 @@
 {% assign currentCategory = page.title | strip_html | downcase %}
 {% assign postCategory = post.category | downcase %}
 <article class="post-preview">
-  {% if currentCategory != postCategory %}
-    <header class="category">
-      <a href="/categoria/{{post.category}}">{{ post.category }}</a>
-    </header>
-  {% endif %}
   <a class="post-preview__link" href="
     {% if post.permalink %}
     {{ post.permalink | relative_url }}

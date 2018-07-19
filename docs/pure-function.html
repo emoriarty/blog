@@ -20,15 +20,15 @@
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="theme-color" content="#473333">
 
-  <base href="http://nocturnidad.es/">
+  <base href="http://enrq.me/blog">
   <link
     rel="canonical"
-    href="http://nocturnidad.es/articulos/pure-function">
+    href="http://enrq.me/blog/pure-function">
   <link
     rel="alternate"
     type="application/rss+xml"
-    title="Nocturnidades"
-    href="/feed.xml">
+    title="Afilando piedras"
+    href="/blog/feed.xml">
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto+Condensed">
@@ -37,7 +37,7 @@
     href="https://fonts.googleapis.com/css?family=Roboto">
   <link
     rel="stylesheet"
-    href="/css/main.css">
+    href="/blog/css/main.css">
   
   
 <style>
@@ -50,8 +50,8 @@
   <div class="wrapper">
     <div class="site-header__title">
       <h1>
-        <a href="/">
-          Nocturnidades
+        <a href="/blog/">
+          Afilando piedras
         </a>
       </h1>
       <ul class="social">
@@ -59,69 +59,6 @@
       </ul>
     </div>
   </div>
-  <div class="wrapper">
-  <nav class="site-nav">
-    
-      <ul>
-        <li>
-          <a href="/">Inicio</a>
-        </li>
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-            <li>
-              <a href="/sobre-mi/">Sobre mí</a>
-            </li>
-          
-        
-          
-        
-      </ul>
-    
-  </nav>
-</div>
-
 </header>
 
 
@@ -129,7 +66,7 @@
   <div class="wrapper">
     <div class="post">
   <header class="post__header">
-    <a class="category-title" href="/categoria/it">it</a>
+    <a class="category-title" href="/categoria/"></a>
     <h1 class="post__header__heading">
       Pure Function
     </h1>
@@ -172,7 +109,7 @@
 <p>Como antes mencioné, el origen de las funciones se encontra en las matemáticas. Principalmente en cálculo analítico y álgebra. La definición general propuesta es la siguiente.</p>
 
 <blockquote>
-  <p>El concepto general de Función, aplicación o mapeo se refiere a una regla que asigna a cada elemento de un primer conjunto un único elemento de un segundo conjunto <sup><a href="/articulos/pure-function#quote-1">1</a></sup>.</p>
+  <p>El concepto general de Función, aplicación o mapeo se refiere a una regla que asigna a cada elemento de un primer conjunto un único elemento de un segundo conjunto <sup><a href="/blog/pure-function#quote-1">1</a></sup>.</p>
 </blockquote>
 
 <p>A continuación se muestra otra interpretación diferente.</p>
@@ -225,9 +162,7 @@
 
 <p>Que el origen de las funciones esté en las matemáticas, no significa que uno deba haber obtenido un doctorado para entenderlas. Si es cierto que es recomendable tener un conocimiento mínimo en la materia. En ciertas ocasiones podrías encontrarte con algún problema de solución matemática y no saber resolverlo por no tener el bagaje necesario.</p>
 
-<p>La gran diferencia entre ambas disciplinas estriba en que las funciones en matemáticas sirven exclusivamente a un solo propósito. En programación pueden tener diferentes usos. En la mayoría de las ocasiones se utilizan para realizar procesos completos, que por su naturaleza arbitraria permite la ausencia o presencia múltiple de parámetros. También puede devolver diferentes resultados en base a un mismo argumento. Esta cualidad procedimental de las funciones es la que se pretende evitar mediante programación funcional.</p>
-
-<p>Para ello se acuñó el término función pura, que no es más que el uso específico de la funciones sea el mismo que en matemáticas.</p>
+<p>La gran diferencia entre ambas disciplinas estriba en que las funciones en matemáticas sirven exclusivamente a un solo propósito. En programación pueden tener diferentes usos. En la mayoría de las ocasiones se utilizan para realizar procesos completos, que por su naturaleza arbitraria permite la ausencia o presencia múltiple de parámetros. También puede devolver diferentes resultados en base a un mismo argumento. Esta cualidad procedimental de las funciones es la que se pretende evitar mediante programación funcional. Para ello se acuñó el término función pura, que no es más que el uso específico de la funciones sea el mismo que en matemáticas.</p>
 
 <p>¿Y qué beneficio aporta una función pura ante una convencional? Podrías estar preguntándote. Para responder a esta pregunta, se expone más abajo una serie de características que muestran porqué favorecer el uso este tipo de funciones.</p>
 
@@ -384,7 +319,7 @@
 
 <p>Obviamente esta no es una práctica que vayamos a utilizar para comprobar todo el fuente en cualquier proyecto medianamente grande. El resultado final podría ser un galimatías muy serio. Por tanto, la transparencia referencial, no tiene mayor utilidad que durante el proceso de desarrollo. Nos permite poder comprobar el comportamiento, fiabilidad y pureza de una función en base al intercambio de su cuerpo por la llamada.</p>
 
-<p>Si quieres, no sería un mal ejercicio terminar por tu cuenta de completar el intercambio de llamadas a función por su contenido. Cuando lo tengas hecho comprueba que el resultado sea el mismo que cuando ejecutaste el fuente original.</p>
+<p>No sería un mal ejercicio completar  por tu cuenta el intercambio de llamadas a función por su contenido. Cuando lo tengas hecho comprueba que el resultado sea el mismo que cuando se ejecutó el fuente original.</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">[{</span>
   <span class="na">isbn</span><span class="p">:</span> <span class="s2">"9788433920638"</span><span class="p">,</span>

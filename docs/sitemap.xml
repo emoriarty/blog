@@ -1,71 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://nocturnidades.blog/</loc>
-    <lastmod>2018-07-19T00:42:43+02:00</lastmod>
+    <loc>http://enrq.me/blog/</loc>
+    <lastmod>2018-07-20T01:15:54+02:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>http://nocturnidades.blog/about/</loc>
-    <lastmod>2018-07-19T00:42:43+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>http://nocturnidades.blog/relatos/</loc>
-    <lastmod>2018-07-19T00:42:43+02:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
   
-  <url>
-    <loc>http://nocturnidades.blog/articulos/principio-responsabilidad-unica</loc>
-    <lastmod>2018-03-29T07:00:00+02:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-   </url>
+    <url>
+      <loc>http://enrq.me/blog/principio-responsabilidad-unica</loc>
+      <lastmod>2018-03-29T07:00:00+02:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+     </url>
    
-  <url>
-    <loc>http://nocturnidades.blog/articulos/pure-function</loc>
-    <lastmod>2018-03-20T01:00:00+01:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-   </url>
+    <url>
+      <loc>http://enrq.me/blog/pure-function</loc>
+      <lastmod>2018-03-20T01:00:00+01:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+     </url>
    
-  <url>
-    <loc>http://nocturnidades.blog/articulos/first-class-function</loc>
-    <lastmod>2018-01-30T22:00:00+01:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-   </url>
+    <url>
+      <loc>http://enrq.me/blog/first-class-function</loc>
+      <lastmod>2018-01-30T22:00:00+01:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+     </url>
    
-  <url>
-    <loc>http://nocturnidades.blog/articulos/vim-ctags</loc>
-    <lastmod>2018-01-26T11:50:00+01:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-   </url>
+    <url>
+      <loc>http://enrq.me/blog/vim-ctags</loc>
+      <lastmod>2018-01-26T11:50:00+01:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+     </url>
    
-  <url>
-    <loc>http://nocturnidades.blog/articulos/vim-configuracion-inicial</loc>
-    <lastmod>2017-12-19T18:30:00+01:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-   </url>
+    <url>
+      <loc>http://enrq.me/blog/vim-configuracion-inicial</loc>
+      <lastmod>2017-12-19T18:30:00+01:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+     </url>
    
-  <url>
-    <loc>http://nocturnidades.blog/articulos/vim-intro</loc>
-    <lastmod>2017-11-03T00:30:00+01:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-   </url>
+    <url>
+      <loc>http://enrq.me/blog/vim-intro</loc>
+      <lastmod>2017-11-03T00:30:00+01:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+     </url>
    
-  <url>
-    <loc>http://nocturnidades.blog/articulos/como-crear-un-blog-con-jekyll</loc>
-    <lastmod>2017-04-03T01:00:00+02:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-   </url>
+    <url>
+      <loc>http://enrq.me/blog/como-crear-un-blog-con-jekyll</loc>
+      <lastmod>2017-04-03T01:00:00+02:00</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+     </url>
    
 </urlset>

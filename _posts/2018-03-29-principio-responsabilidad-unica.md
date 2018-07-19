@@ -2,8 +2,7 @@
 title: "Principio de responsabilidad única"
 date: 2018-03-29 06:00:00 +0100
 excerpt: Parte de un buen diseño se debe a la utilización de varios patrones durante el desarrollo de un programa. Uno de lo más útiles y fáciles de implementar es el principio de responsabilidad única.
-permalink: /articulos/principio-responsabilidad-unica
-category: it
+permalink: /principio-responsabilidad-unica
 tags: [programacion-funcional, diseño, patrones, terminos-informaticos]
 ---
 En un [artículo anterior][pure-function] tratábamos el tema de las funciones puras. El texto introduce de manera implícita el concepto de responsabilidad única sin apenas profundizar en él. Entender la importancia de esta patrón de diseño me ha parecido lo suficientemente interesante como para dedicarle un _spin-off_.
