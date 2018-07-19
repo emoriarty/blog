@@ -155,7 +155,7 @@ También es recomendable si trabajas dentro de un equipo y no tienes un claro co
 * [toptal.com/software/single-responsibility-principle](https://www.toptal.com/software/single-responsibility-principle)
 * [oodesign.com/single-responsibility-principle.html](http://www.oodesign.com/single-responsibility-principle.html)
 
-[pure-function]: /articulos/pure-function
+[pure-function]: /blog/pure-function
 [srp]: https://www.wikiwand.com/es/Principio_de_responsabilidad_%C3%BAnica
 [spaghetti]: https://es.wikipedia.org/wiki/C%C3%B3digo_espagueti
 [dry]: https://es.wikipedia.org/wiki/No_te_repitas
