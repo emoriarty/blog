@@ -1,6 +1,0 @@
-<p>
-{% assign list = include.pages | sort: 'title'%}
-{% for m_page in list %}
-  <a class="not-found-item" href="{{m_page.url | relative_url}}">{{m_page.title}}</a>
-{% endfor%}
-</p>

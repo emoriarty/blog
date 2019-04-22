@@ -1,7 +1,0 @@
-url: "http://enrq.me"
-baseurl: "/blog"
-sass:
-  sass_dir: _sass
-  style: compressed
-compress_html:
-  profile: false

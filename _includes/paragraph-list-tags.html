@@ -1,7 +1,0 @@
-<p>
-{% assign list = site.tags | sort %}
-{% for tags in list %}
-  {% assign name = tags | first %}
-  <a class="not-found-item" href="{{ '/tag/' | append: name | relative_url}}">{{name}}</a>
-{% endfor %}
-</p>

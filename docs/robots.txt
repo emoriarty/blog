@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: http://enrq.me/blog/sitemap.xml

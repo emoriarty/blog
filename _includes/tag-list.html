@@ -1,8 +1,0 @@
-{% assign currentTag = page.title | strip_html %}
-<ul class="tags">
-{% for tag in include.tags %}
-  {% if currentTag != tag %}
-    <li><a href="/tag/{{ tag }}">{{ tag }}</a></li>
-  {% endif %}
-{% endfor %}
-</ul>

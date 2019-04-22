@@ -1,7 +1,0 @@
-<p>
-{% assign list = site.categories | sort %}
-{% for cats in list %}
-  {% assign name = cats | first %}
-  <a class="category-title not-found-item" href="{{ '/categoria/' | append: name | relative_url}}">{{name}}</a>
-{% endfor %}
-</p>
