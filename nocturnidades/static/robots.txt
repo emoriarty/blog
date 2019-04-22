@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: http://nocturnidad.es/sitemap.xml
