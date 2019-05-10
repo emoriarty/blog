@@ -1,9 +1,5 @@
-# gatsby-starter-i18n-blog
-Gatsby starter for creating a i18n blog
-
-Install this starter (assuming Gatsby is installed) by running from your CLI:
-
-`gatsby new gatsby-blog https://github.com/jackbravo/gatsby-starter-i18n-blog`
+# Enrique Arias' Personal Site
+This is the Enrique Arias' personal site. All the content is available under [Attribution-NonCommercial](https://creativecommons.org/licenses/by-nc/4.0/) License.
 
 ## Running in development
-`gatsby develop`
+`npm run develop`

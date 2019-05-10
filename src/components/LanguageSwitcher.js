@@ -30,12 +30,12 @@ class LanguageSwitcher extends React.Component {
             marginBottom: rhythm(1.5),
           }}>
             {data.allMarkdownRemark.edges.map(({ node }) => {
-              if (node.frontmatter.language == language) {
-                return
+              if (node.frontmatter.language === language) {
+                return null
               } else {
                 let translationLink = node.fields.slug
                 if (translations) {
-                  const translationIndex = translations.findIndex(v => v == node.frontmatter.language)
+                  const translationIndex = translations.findIndex(v => v === node.frontmatter.language)
                   if (translationIndex !== -1) {
                     translationLink = translations[translationIndex+1]
                   }

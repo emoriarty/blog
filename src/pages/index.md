@@ -2,7 +2,7 @@
 type: language
 language: en
 language_label: "English"
-title: "Nocturnal Notes"
+title: "Midnight Notes"
 description: "This is Enrique Arias personal blog."
 ---
 

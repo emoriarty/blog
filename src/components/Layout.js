@@ -4,6 +4,8 @@ import LanguageSwitcher from './LanguageSwitcher'
 
 import { rhythm } from '../utils/typography'
 
+import '../assets/style.css'
+
 class Layout extends React.Component {
   render() {
     const { location, config, children, translations } = this.props
@@ -19,11 +21,10 @@ class Layout extends React.Component {
         >
           <Link
             style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-              boxShadow: 'none',
               backgroundImage: 'none',
+              boxShadow: 'none',
+              color: 'inherit',
+              textDecoration: 'none',
             }}
             to={config.fields.slug}
           >
