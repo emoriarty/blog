@@ -5,7 +5,7 @@ module.exports = {
     title: 'Nocturnal Notes',
     description: 'Enrique Arias\' Personal blog',
   },
-  pathPrefix: '/',
+  pathPrefix: '/blog',
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,

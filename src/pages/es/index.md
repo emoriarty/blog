@@ -1,7 +1,7 @@
 ---
 type: language
 language: es
-language_label: "Castellano / Español"
+language_label: "Castellano"
 title: "Apuntes a medianoche"
 description: "Este es el blog personal de Enrique Arias."
 ---

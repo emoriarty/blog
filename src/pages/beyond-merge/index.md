@@ -160,7 +160,7 @@ git push --force-with-lease
 
 While working in a branch we don't pay much attention how the the commit 
 history looks like. In fact we are focused on development. But when the current 
-work is already completed, is time to sort the log.  By accumulating all those
+work is already completed, is time to sort the log. By accumulating all those
 non-useful commits, we will end up looking like we’re suffering Diogenes syndrome.
 
 ```bash
@@ -178,14 +178,14 @@ ee42779 New demo file
 
 The upper log shows a log history where the master branch (*d9ad32e*) and the 
 local HEAD (*259aff2*) points to different commits. Except the first commit 
-(*2dc6065*) there are no meaningful descriptions between them. Since each commit 
+(*2dc6065*) the rest of messages are redundant or non-meaningful. Since each commit 
 refers to the same feature, a suitable solution to arrange the log is to use 
-`rebase` to join them into one commit. 
+`rebase` to group them together into one unique commit. 
 
 `rebase` is not only an alternative to the merge command. Actually, the command 
 is meant to rewrite the project history. With that notion in mind, `rebase` is 
 able to be used in the same branch. Instead of specifying a branch name, a 
-previous commit is passed in. Actually a branch name is not more that a 
+previous commit is passed in. Indeed a branch name is not more that a 
 meaningful name pointing to a commit.
 
 There is more regarding the rebase. It can be executed automatically by default 
@@ -210,13 +210,14 @@ fixup 259aff2 body edit
 ```
 
 `fixup` or `f` for short, merges in bulk the marked commits with the previously 
-picked one. In difference with `squash`, `fixup` don't reuse the provided message.
+picked one (*2dc6065*). In difference with `squash`, `fixup` don't reuse the provided message.
 
 `reword` allows to rewrite the commit message. `rebase` executes the provided 
 actions after saving the file and closing the editor. When the task has been 
 completed, the editor jumps again, allowing us to introduce the new commit description. 
 
-Once the rebase has completed, the next log looks like below.
+Once the rebase has completed, the next log looks like below. The commits between 
+*2569f57* y *d9ad32e* have been incorporated into the former.
 
 ```bash
 2569f57 (HEAD -> A) feature A
@@ -234,28 +235,27 @@ subject. You stop working immediately what you're at and start on that new idea.
 Damn serendipity!
 
 The next steps from a git perspective are (1) saving things up and (2) create a 
-new branch. Now, we are able to work in whatever is that brilliant idea. The 
+new branch from *master*. Now, we are able to work in whatever is that brilliant idea. The 
 git loop starts: Work. Test things up. Save progress. And back to the beginning
 of the loop until the job is done.
 
 Finally we go back to the unfinished branch and start working again in the same loop.
 
-Lots of commits are created during this process. All of them refers to the same
-topic. So, why keeping all these commits when actually only one commit per branch
-will do? Is it not easier to search in the log for a commit with a one nice and
-concise message than looking for a bunch of different commits? Are they in the
-same slot? Do they got interlaced among unrelated commits?
+Lots of commits are created during this process. Most of them (if not all) belong
+to the same piece. So, why keeping all these commits when actually only one commit
+per branchwill do? Is it not easier to search in the log for a commit with a one
+nice and concise message than looking for a bunch of different commits? Are they
+in the same slot? Do they got interlaced among unrelated commits?
 
-All right, we can pick and merge commits by doing a rebase, but why bother when
-we already know everything relates to the same piece? Why not “squash” all of
-them in the same first commit? Sure we can.
+All right, we can pick and merge commits by doing a rebase over the same branch,
+but why bother when we ahready know everything relates to the same feature?
+Why not “squash” all of them in the same first commit? Sure we can.
 
 Let’s tackle the *autosquash* feature.
 
 ### Autosquash (or how to keep a clean log while working)
 
-```bash
-1a9bfea (HEAD -> A) New A file
+```bash 1a9bfea (HEAD -> A) New A file
 d9ad32e (master) A new commit is introduced while previous changes are in stash
 13b16a5 Revert "README updated"
 76a1097 Demo file updated
@@ -264,17 +264,17 @@ a31e004 README updated
 ee42779 New demo file
 ```
 
-After the first commit (*1a9bfea*), we see that we're going to work over the same
-file, so the next ones can be coerced up to be part of the first commit in the
-current branch by using the option `--fixup`. 
+After the first commit in *A* branch (*1a9bfea*), we see that we're going to work
+over the same file, or related. Therefore the next commits can be coerced up to be part
+of the same first record by using the option `--fixup`. 
 
 ```bash
-git commit —fixup=1a9bfea
+git commit --fixup=1a9bfea
 ```
 
-As you recall *fixup* is one of the actions present in the *rebase* command.
-Similarly, this *fixup* option allows merging the current commit into the
-provided one. But first let's see the resulting log.
+As you recall *fixup* is one of the available actions present in the `rebase`
+command. Similarly, this *fixup* option allows merging the current commit into
+the provided one. But first let's see the resulting log.
 
 ```bash
 4cca556 (HEAD -> A) fixup! New A file
@@ -289,7 +289,7 @@ ee42779 New demo file
 
 Have you noticed the “fixup!” prefix in the last commit message? Also the
 message is the same of the previous commit. Wait! wasn’t supposed to be merged
-into the provided commit? Yes, it is. But don’t worry. It’s imperative to keep
+boths commits? Yes, it is. But don’t worry. It’s imperative to keep
 the changes in the log, otherwise they could get lost. Later on will see how
 they are merged.
 
@@ -327,7 +327,7 @@ git rebase -i —-autosquash d9ad32e
 ```
 
 The `—-autosquash` option automatically moves every commit message beginning with
-“fixup!” right before the commit marked to be modified.
+“fixup!” right after the commit marked to be modified.
 
 ```bash
 pick 7eadcf3 New A file
@@ -337,13 +337,14 @@ fixup 77ca177 fixup! fixup! fixup! New A file
 pick e8fe7f6 README updated
 
 # Rebase d9ad32e..77ca177 onto d9ad32e (5 commands)
+...
 ```
 
 We can appreciate how git automatically has replaced the default pick command
 by *fixup*. git knows how to do so because we previously marked the commits were
 going to be squashed into the selected commit. The way the order was kept is by
-adding a new "fixup!" prefix to the commit message. The more prefixes,
-the next in line.
+adding a new "fixup!" prefix to the commit message. Each new prefix increments
+one position in the queue.
 
 After saving the file the rebase takes action and the resulting log would look
 like this.
@@ -359,11 +360,11 @@ a31e004 README updated
 ee42779 New demo file
 ```
 
-In order to have a more complete example both files are separate commits. The
-`README` file update could be part of the same commit, keeping a tighter and
-coherent log.
-
-## Squashing a branch into master
+Instead merging the feature branch into one commit, I've decided to leave each
+file into one and independent *commit*. This way we've seen a how to use
+*autosquash* in a more pratical case.
+ 
+## Squashing branches into master
 
 The last way we are going to see how to squash non-useful commits (at least
 from a global perspective) can be done by passing the `--squash` option when
@@ -383,7 +384,7 @@ executing a merge command.
 * ee42779 - New demo file (3 weeks ago) <Enrique Arias>
 ```
 
-By looking at the current log, we see branch *A*, *B* and *master* are  pointing to
+By looking at the current log, we see branch *A*, *B* and *master* are pointing to
 commits *d571d6c*, *1ac6aff* and *d9ad32e*, respectively. We decide it is time to
 squash *A* and *B* branches into *master* but we don’t want to keep the current
 commits from both branches. With one commit will be enough to bring both
@@ -398,7 +399,7 @@ git merge --squash B
 ```
 
 If we check the log again, will see no new commit. A squashing merge does not
-complete the operation at all. The index state is modified with the changes from
+complete the operation at all. The stage index is modified with the changes from
 *B* branch but the pending commit is left for the user. At this point let’s
 also merge by squashing the *A* branch and commiting the changes.
 
@@ -426,7 +427,8 @@ branches.
 * ee42779 - New demo file (3 weeks ago) <Enrique Arias>
 ```
 
-The last thing to do after is removing the feature branches. Once merged, there's no need for them.
+The last thing to do after is removing the feature branches. Once merged,
+there's no need for them.
 
 And this is the final log without feature branches.
 

@@ -163,3 +163,318 @@ git push --force-with-lease
 ```
 
 ## Seleccionando *commits*
+
+Mientras se trabaja en una rama no se suele prestar mucha atención a como está
+quedando el registro. Es normal, estamos concentrados en la tarea. Para cuando
+el trabajo termina, es hora de ordenar el registro. Acumular todos esos innecesarios
+*commits* puede dar la impresión de que sufrimos de un caso agudo de
+síndrome de diógenes.
+
+```bash
+259aff2 (HEAD -> A) body edit
+7a48555 wip: body content
+71a621b A file updated
+2dc6065 new A file
+d9ad32e (master) A new commit is introduced while previous changes are in stash
+13b16a5 Revert "README updated"
+76a1097 Demo file updated
+a31e004 README updated
+44d4c5b New README file
+ee42779 New demo file
+```
+
+El registro superior muestra un listado histórico donde la rama *master* (*d9ad32e*)
+y el *HEAD* (*259aff2*) local apuntan a *commits* diferentes. Excepto el primer
+*commit* (*2dc6065*) el resto de mensajes son redudantes o no son descriptivos.
+Dado que cada *commit* se refiera a la misma funcionalidad, la solución más
+adecuada es usar el comando `rebase` para agrupalos todos en un único *commit*.
+
+`rebase` no es solo una forma alternative de hacer *merge*. En realidad, la función 
+principal del comando es la de reescribir el registro de *git*. Con esta idea en
+mente, `rebase` se puede usar en una misma rama. En lugar de especificar un
+nombre de rama, un identificador de commit puede ser usado. De hecho, un nombre
+de rama no es más que un nombre significativo que apunta a un commit en concreto.
+
+Otra propiedad interesante de `rebase` es que puede ser ejecutado de manera
+automática o interactiva pasando la opción `-i`.  El modo interactivo ofrece 
+la posibilidad de reordenar el registro actuando sobre cada *commit* con una
+acción específica.
+
+```bash
+g rebase -i d9ad32e
+```
+
+Tras lanzar el comando previo, aparce el editor por defecto abriendo el archivo
+mostrado más abajo. En mi caso *vim* es el editor por defecto pero tú puedes
+cofigurar el tuyo usando la opción de configuración [core.editor][coreditor]. 
+
+```bash
+reword 2dc6065 new A file
+fixup 71a621b A file updated
+fixup 7a48555 wip: body content
+fixup 259aff2 body edit
+
+# Rebase d9ad32e..259aff2 onto d9ad32e (4 commands)
+...
+```
+
+Por razones de brevedad se ha omitido la parte inferior del fichero, un resumen
+sobre que hace cada comando.
+
+`fixup`, o `f` para abreviar, combina en bloque los *commits* marcados al previemente
+seleccionado (*2dc6065*). A diferencia de `squash`, `fixup` no reutiliza el
+mensaje facilitado.
+
+`reword` permite reescribir el mensaje asociado al commit mientras mantiene
+el mismo en el registro.
+
+`rebase` ejecuta las acciones descritas tras guardar y cerrar el editor.
+En este caso, cuando la tarea ha sido completada, el editor salta de nuevo
+para poder introducir la nueva descripción del *commit*
+
+Una vez el *rebase* ha terminado, el registro debería parecerse al mostrado abajo.
+Los commits entre *2569f57* y *d9ad32e* han sido includios en el primero.
+
+```bash
+2569f57 (HEAD -> A) feature A
+d9ad32e (master) A new commit is introduced while previous changes are in stash
+13b16a5 Revert "README updated"
+76a1097 Demo file updated
+a31e004 README updated
+44d4c5b New README file
+ee42779 New demo file
+```
+
+## Montones de commits relacionados
+
+A veces ocurre el tener una idea repentina mientras se está trabajando en otro
+asunto totalmente distinto. Dejas lo que estás haciendo y te pones manos a la
+obra con la nueva idea. ¡Maldita serendipia!
+
+Los siguientes pasos a seguir en git son (1) guardar cambios y (2) crear una
+nueva rama desde *master*. Ahora ya podemos trabajar en cualquier cosa que sea
+esa brillante idea. El bucle *git* ha empezado: Cambios. Testear. Guarder
+progreso. Y de vuelta al inicio del bucle hasta que la tarea esté acabada.
+
+Por último volveremos a trabajar en la rama inacabada y el mismo bucle se
+repite.
+
+Muchos *commits* son creados durante este proceso. La mayor parte (sino todos)
+pertencen a la misma tarea. ¿Por qué todos estos *commits* cuando en realidad
+uno solo por rama sería suficiente? ¿No es más fácil buscar en un registro por
+commit con una descripción clara y concisa que hacerlo entre un montón de *commits*
+diferentes? ¿Están todos en el mismo bloque? ¿Han quedado entrelazados entre
+*commits* no relacionados?
+
+Está claro que podemos seleccionar y unir *commits* haciendo un *rebase* sobre la
+propia rama pero ¿para que molestarse cada vezc cuando realmentes ya sabemos que
+todo pertenecen al mismo conjunto? ¿Por qué no fusionarlos con en el primer
+commit de la rama? Pues que sepas que sí se puede hacer.
+
+Veamos ques es la propiedad *autosquash*.
+
+## *Autosquash* (o cómo mantener un registro claro mientras se trabaja)
+
+```bash
+1a9bfea (HEAD -> A) New A file
+d9ad32e (master) A new commit is introduced while previous changes are in stash
+13b16a5 Revert "README updated"
+76a1097 Demo file updated
+a31e004 README updated
+44d4c5b New README file
+ee42779 New demo file
+```
+
+Tras el primer *commit* de la rama *A* (*1a9bfea*), podemos intuir que vamos a trabajar 
+todo el tiempo en un mismo archivo, o relacionados. Por tanto los siguientes *commits*
+pueden ser forzados para formar parte de ese mismo primer registro usando la opción
+`--fixup`.
+
+```bash
+git commit --fixup=1a9bfea
+```
+
+Como recordarás *fixup* es una de las acciones disponibles que ofrece el comando
+`rebase`. De la misma manera, la ocpción *fixup* permite unir el *commit* que se
+está llevando a cabo junto al indicado. Tras la ejecución veríamos el siguente
+registro.
+
+```bash
+4cca556 (HEAD -> A) fixup! New A file
+1a9bfea New A file
+d9ad32e (master) A new commit is introduced while previous changes are in stash
+13b16a5 Revert "README updated"
+76a1097 Demo file updated
+a31e004 README updated
+44d4c5b New README file
+ee42779 New demo file
+```
+
+¿Te has fijado en el prefijo «fixup!» en el último *commit*? También el mensaje
+es el mismo que el del registro anterior. ¡Un momento! No se suponía que debían
+unirse ambos *commits*? Sí, es cierto. Pero no te preocupes demasiado por esto.
+Es imperativo que los cambios queden registrados, en caso contrario podrían
+perderse para siempre. Más tarde veremos como fusionarlos.
+
+Hay otra forma de hacer *fixup* (que traducido sería algo así como «arreglar»).
+En vez de proporcionar un identificador de *commit*, se puede buscar a través
+de los mansajes asociados a un *commit* mediante un texto coincidente. El primer
+resultado será usado como punto de entrada.
+
+```bash
+git commit —fixup=:/A\ file
+```
+
+Ahora, supongamos que modificamos y registramos el archivo *README*. Luego
+trabajamos en el mismo archivo previo y lo registramos con la opción
+*fixup* de nuevo. El registro resultante debería ser algo parecido al mostrado
+a continuación.
+
+```bash
+1e0118e (HEAD -> A) fixup! fixup! fixup! New A file
+6991e75 README updated
+72f1297 fixup! fixup! New A file
+4cca556 fixup! New A file
+1a9bfea New A file
+d9ad32e (master) A new commit is introduced while previous changes are in stash
+13b16a5 Revert "README updated"
+76a1097 Demo file updated
+a31e004 README updated
+44d4c5b New README file
+ee42779 New demo file
+```
+
+Llegados a este punto, la rama ya ha sido completada. Es hora de hacer *rebase*
+desde donde se estableció la nueva rama. El commit de referencia es *d9ad32e*.
+
+```bash
+git rebase -i —-autosquash d9ad32e 
+```
+
+La propiedad `--autosquash` mueve automáticamente cada uno de los *commits*
+con el prefijo «fixup!» justo después del registro inmediato al proporcionado
+en el *rebase*.
+
+```bash
+pick 7eadcf3 New A file
+fixup c913bb3 fixup! New A file
+fixup e8bd977 fixup! fixup! New A file
+fixup 77ca177 fixup! fixup! fixup! New A file
+pick e8fe7f6 README updated
+
+# Rebase d9ad32e..77ca177 onto d9ad32e (5 commands)
+...
+```
+
+Podemos observar como *git* ha reemplazado automáticamente el comando *pick* por
+*fixup*. *git* sabe como proceder porque anteriormente hemos marcado los
+*commits* para ser fusionados con el registro seleccionado. El orden específico
+se garantiza añadiendo un nuevo prefijo «fixup!» en el mensaje del *commit*.
+Por cada nuevo prefijo se incrementa su posición en la cola.
+
+Después de guardar y cerrar el fichero, *rebase* se ejecuta y el resultado del
+registro es el siguiente.
+
+```bash
+d571d6c (HEAD -> A) README updated
+8e078dd New A file
+d9ad32e (master) A new commit is introduced while previous changes are in stash
+13b16a5 Revert "README updated"
+76a1097 Demo file updated
+a31e004 README updated
+44d4c5b New README file
+ee42779 New demo file
+```
+
+En vez de unir toda la rama a un mismo registro, he preferido dejar cada archivo
+en un único e independiente *commit*. De estas manera hemos podido ver como usar
+*autosquash* en un caso más práctico.
+
+## Aplastando ramas en *master*
+
+El último método que vamos a ver sobre como *aplastar* (sí, es la traducción para
+*squash*) *commits* no útiles (que no inútiles) puede hacerse pasando la opción
+`--squash` cuando se ejecuta el comando `merge`.
+
+```bash
+* d571d6c - (A) README updated (23 hours ago) <Enrique Arias>
+* 8e078dd - New A file (23 hours ago) <Enrique Arias>
+| * 1ac6aff - (B) B file updated (5 days ago) <Enrique Arias>
+| * d657116 - new B file (5 days ago) <Enrique Arias>
+|/
+* d9ad32e - (HEAD -> master) A new commit is introduced while previous changes are in stash (2 weeks ago) <Enrique Arias>
+* 13b16a5 - Revert "README updated" (3 weeks ago) <Enrique Arias>
+* 76a1097 - Demo file updated (3 weeks ago) <Enrique Arias>
+* a31e004 - README updated (3 weeks ago) <Enrique Arias>
+* 44d4c5b - New README file (3 weeks ago) <Enrique Arias>
+* ee42779 - New demo file (3 weeks ago) <Enrique Arias>
+```
+
+Observando el registro actual, vemos que la rama *A*, *B* y *master* apuntan
+a los identificadores de *commits* *d571d6c*, *1ac6aff* y *d9ad32e*, respectivamente.
+Decidimos que ya es hora de unir *A* y *B* en *master* pero no queremos mantener
+los commits actuales de las ramas derivadas. Recuerda que estos ejemplos son meramente 
+divulgativos, en el mundo real lo más probable es que al menos se preservase
+un commit por rama con el fin de mantener al menos un registro sucinto pero
+completo.
+
+Fusionemos primero la rama *B*.
+
+```bash
+git merge --squash B
+```
+
+Si volvemos a ver el *log*, no encontraremos rastro de un nuevo *commit* y es que
+`merge --squash` no completa la operación. En este caso los cambios de la rama
+*B* quedan registrados en el área de *stage* dejando al usuario el *commit*
+pendiente. Estando así la cosa, pasemos a fusionar también la rama *A* con la
+opción `--squash` y hagamos *commit*.
+
+```bash
+git merge --squash A && git commit
+```
+
+En el registro resultante no hallaremos rastro alguno de los *commits* individuales
+de las ramas *A* y *B* en *master*. Solo un *commit* representa todos los cambios
+realizados en cada rama.
+
+```bash
+* ee34439 - (HEAD -> master) Squashed commit of the following: (12 seconds ago) <Enrique Arias>
+| * d571d6c - (A) README updated (23 hours ago) <Enrique Arias>
+| * 8e078dd - New A file (23 hours ago) <Enrique Arias>
+|/
+| * 1ac6aff - (B) (B) B file updated (5 days ago) <Enrique Arias>
+| * d657116 - (B) new B file (5 days ago) <Enrique Arias>
+|/
+* d9ad32e - A new commit is introduced while previous changes are in stash (2 weeks ago) <Enrique Arias>
+* 13b16a5 - Revert "README updated" (3 weeks ago) <Enrique Arias>
+* 76a1097 - Demo file updated (3 weeks ago) <Enrique Arias>
+* a31e004 - README updated (3 weeks ago) <Enrique Arias>
+* 44d4c5b - New README file (3 weeks ago) <Enrique Arias>
+* ee42779 - New demo file (3 weeks ago) <Enrique Arias>
+```
+
+La última cosa que queda por hacer es eliminar la ramas sobrantes. Una vez
+fusionadas, ya no hay más necesidad de ellas.
+
+Y este es el resultado final del registro sin ramas aledañas.
+
+```bash
+* ee34439 - (HEAD -> master) Squashed commit of the following: (12 hours ago) <Enrique Arias>
+* d9ad32e - A new commit is introduced while previous changes are in stash (3 weeks ago) <Enrique Arias>
+* 13b16a5 - Revert "README updated" (3 weeks ago) <Enrique Arias>
+* 76a1097 - Demo file updated (3 weeks ago) <Enrique Arias>
+* a31e004 - README updated (3 weeks ago) <Enrique Arias>
+* 44d4c5b - New README file (3 weeks ago) <Enrique Arias>
+* ee42779 - New demo file (3 weeks ago) <Enrique Arias>
+```
+
+Espero que estos consejos sobre usar *git* para mantener un registro incremental,
+comprensible y sucinto te sean de ayuda. Quizás pueda no parecer demasiado
+importante conservar un registro ordenado pero, creeme, le estarás haciendo un
+favor al tipo que gestione el repositorio *git* del proyecto. Te esterá eternamente
+agradecido. Por otro lado, siguiendo estas prácticas a diario tendrán un impacto 
+positivo en tu carrera profesional. Así que no tengas un registro desordenado,
+deja que el trabajo hable por ti.
+
+[coreditor]: https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_code_core_editor_code
