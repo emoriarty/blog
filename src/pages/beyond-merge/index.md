@@ -80,7 +80,7 @@ track of those related commits blocks in the same slot.
 1———2———3———A1———A2———B1———A2
 ```
 
-The above picture shows how the the origin branch conserves a linear order
+The above figure shows how the the origin branch conserves a linear order
 according to the working blocks and not by timestamps.
 
 A convenient way to prevent conflicts while working on a feature branch is to
@@ -303,7 +303,7 @@ git commit —fixup=:/A\ file
 
 Now, let’s say we change and commit the *README* file. Then work again in the
 previous file a commit with the *fixup* option again. The resulting log should
-look like the picture below.
+look like the figure below.
 
 ```bash
 1e0118e (HEAD -> A) fixup! fixup! fixup! New A file
