@@ -87,3 +87,34 @@ Lorem ipsum dolor sit amet...
 ```
 
 The file starts with three dashes in what looks like a set of options and ends with another three dashes. This is what is called the **frontmatter**.
+
+## Frontmatter
+
+If you recall the `_layouts` folder, where HTML templates are stored, seems reasonable to think the `layout` option in the *frontmatter* seen above is somehow related to the layouts folder. If that was your guess, you were right. In fact, it is telling to jekyll to make use the `default.html` layout to wrap the content in this file.
+
+A layout file can only be one type: HTML. Therefore, there's no need to add the file extension (.html) when setting the `layout` option in the *frontmatter*. Just the file name suffices.
+
+Unlike the `layout` option, which is meant to feed Jekyll engine, the `title` option is not required. At least not for Jekyll. `title` is a site's variable. Its value will be replaced whenever the `title` variable is found in any file containing the *frontmatter* at the beginning. **A file without *frontmatter* will not be processed, only copied.**
+
+But, where exactly has the `title` variable been used? As you well guessed, it is the `default.html` file where the `<title>` html tag is declared. Usually, the `<head>` tag and its body resides in a specific include file (`_include/head.html`) to be able to be reused between templates. For shortness we work with a layout.
+
+To grasp a better understanding, take a look at the sample of a `default.html` file below.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--====== Required meta tags ======-->
+    <meta charset="utf-8">
+    <meta name="description" content="{{ page.description }}">
+    <title>{{ page.title }}</title>
+</head>
+<body>
+{{ content }}
+</body>
+</html>
+```
+
+The `page.title` variable corresponds with the `title` in the `about.md` frontmatter. After building the site, the `page.title` word is replaced by the `title` value in the frontmatter. The same process is done for any of the files found in the Jekyll folder. Remember, **only files containing *frontmatter* are processed**.
+
+All *frontmatter* variables defined in a page are contained on the `page` variable provided by Jekyll. Therefore, if you add a `description` variable, it will be accessed using the `{{ page.description }}` expression like `title`.
